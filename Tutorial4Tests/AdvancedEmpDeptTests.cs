@@ -107,10 +107,20 @@ public class AdvancedEmpDeptTests
     public void ShouldReturnEmployeeManagerPairs()
     {
         var emps = Database.GetEmps();
+
+        var result = emps
+            .Join(
+                emps,
+                emp => emp.Mgr,
+                mgr => mgr.EmpNo,
+                (emp, mgr) => new
+                {
+                    Employee = emp.EName,
+                    Manager = mgr.EName
+                }
+            ).ToList();
         
-        //var result = 
-        
-        //Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
+        Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
     }
 
     // 19. Let clause usage (sal + comm)
