@@ -42,3 +42,4 @@ C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4\obj\De
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4\obj\Debug\net9.0\Tutorial4.pdb
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4\obj\Debug\net9.0\Tutorial4.genruntimeconfig.cache
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4\obj\Debug\net9.0\ref\Tutorial4.dll
+C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4\obj\Debug\net9.0\Tutorial4.sourcelink.json

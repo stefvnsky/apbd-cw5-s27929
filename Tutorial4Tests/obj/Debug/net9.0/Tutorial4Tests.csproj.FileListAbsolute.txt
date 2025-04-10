@@ -313,3 +313,4 @@ C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4Tests\o
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4Tests\obj\Debug\net9.0\Tutorial4Tests.pdb
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4Tests\obj\Debug\net9.0\Tutorial4Tests.genruntimeconfig.cache
 C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4Tests\obj\Debug\net9.0\ref\Tutorial4Tests.dll
+C:\Users\user\Desktop\STUDIA\sem4\APBD\Zad2\Tutorial5\Tutorial4\Tutorial4Tests\obj\Debug\net9.0\Tutorial4Tests.sourcelink.json

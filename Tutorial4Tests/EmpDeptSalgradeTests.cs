@@ -14,11 +14,11 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
 
         var result = emps.Where(e => e.Job == "SALESMAN").ToList(); 
         
-        //wypisanie wyniku 
+        /*wypisanie wyniku 
         foreach (var emp in result)
         {
             output.WriteLine($"{emp.EName} - {emp.Sal} - {emp.Job}");
-        }
+        }*/
 
         Assert.Equal(2, result.Count);
         Assert.All(result, e => Assert.Equal("SALESMAN", e.Job));
@@ -31,13 +31,23 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     {
         var emps = Database.GetEmps();
 
-        List<Emp> result = emps
+        var result = emps
             .Where(e => e.DeptNo == 30)
             .OrderByDescending(e => e.Sal)
-            .ToList(); 
+            .ToList();
 
-        Assert.Equal(2, result.Count);
-        Assert.True(result[0].Sal >= result[1].Sal);
+        /*foreach (var emp in result)
+        {
+            output.WriteLine($"{emp.EName} - {emp.Sal} - {emp.DeptNo}");
+        }*/
+        
+        //czy kazdy pracownik nalezy do Deptno=30
+        Assert.All(result, e => Assert.Equal(30, e.DeptNo));
+        //czy lista posortowana malejąco
+        Assert.True(result.SequenceEqual(result.OrderByDescending(e => e.Sal)));
+        
+        /*Assert.Equal(2, result.Count);
+        Assert.True(result[0].Sal >= result[1].Sal);*/
     }
 
     // 3. Subquery using LINQ (IN clause)
