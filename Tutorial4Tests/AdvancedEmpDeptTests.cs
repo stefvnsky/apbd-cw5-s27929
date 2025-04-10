@@ -148,8 +148,26 @@ public class AdvancedEmpDeptTests
         var depts = Database.GetDepts();
         var grades = Database.GetSalgrades();
 
-        // var result = null; 
-        //
-        // Assert.Contains(result, r => r.EName == "ALLEN" && r.DName == "SALES" && r.Grade == 3);
+        var result = emps
+            .Join(depts,
+                emp => emp.DeptNo,
+                dept => dept.DeptNo,
+                (emp, dept) => new { emp, dept })
+            .SelectMany(
+                ed => grades,
+                (ed, grade) => new
+                {
+                    ed.emp.EName,
+                    ed.dept.DName,
+                    Grade = grade.Grade,
+                    ed.emp.Sal,
+                    grade.Losal,
+                    grade.Hisal
+                })
+            .Where(joined => joined.Sal >= joined.Losal && joined.Sal <= joined.Hisal)
+            .ToList();
+
+        
+        Assert.Contains(result, r => r.EName == "ALLEN" && r.DName == "SALES" && r.Grade == 3);
     }
 }
