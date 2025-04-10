@@ -65,7 +65,11 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
         var emps = Database.GetEmps();
 
         var result = emps
-            .Select(e => new { e.EName, e.Sal })
+            .Select(e => new
+            {
+                e.EName, 
+                e.Sal
+            })
             .ToList();
         
         Assert.All(result, r =>
@@ -123,9 +127,16 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.All(result, r => Assert.NotNull(r.Comm));
+        var result = emps
+            .Where(emp => emp.Comm is not null)             //ci z prowizja
+            .Select(emp => new                              //tylko ename i prowizja
+            {
+                emp.EName, 
+                emp.Comm
+            })       
+            .ToList();
+        
+        Assert.All(result, r => Assert.NotNull(r.Comm));
     }
 
     // 8. Join with Salgrade
