@@ -17,5 +17,6 @@
     &lt;TestId&gt;xUnit::73439BA3-64B9-4BEC-A837-8A5044D3E5BB::net9.0::Tutorial3Tests.AdvancedEmpDeptTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::73439BA3-64B9-4BEC-A837-8A5044D3E5BB::net9.0::Tutorial3Tests.EmpDeptSalgradeTests.ShouldReturnAllSalesmen&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::73439BA3-64B9-4BEC-A837-8A5044D3E5BB::net9.0::Tutorial3Tests.EmpDeptSalgradeTests.ShouldReturnDept30EmpsOrderedBySalaryDesc&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::73439BA3-64B9-4BEC-A837-8A5044D3E5BB::net9.0::Tutorial3Tests.EmpDeptSalgradeTests.ShouldReturnEmployeesFromChicago&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

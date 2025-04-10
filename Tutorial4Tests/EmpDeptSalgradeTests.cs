@@ -35,11 +35,6 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
             .Where(e => e.DeptNo == 30)
             .OrderByDescending(e => e.Sal)
             .ToList();
-
-        /*foreach (var emp in result)
-        {
-            output.WriteLine($"{emp.EName} - {emp.Sal} - {emp.DeptNo}");
-        }*/
         
         //czy kazdy pracownik nalezy do Deptno=30
         Assert.All(result, e => Assert.Equal(30, e.DeptNo));
@@ -51,16 +46,25 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     }
 
     // 3. Subquery using LINQ (IN clause)
-    // SQL: SELECT * FROM Emp WHERE DeptNo IN (SELECT DeptNo FROM Dept WHERE Loc = 'CHICAGO');
+    // SQL: SELECT * FROM Emp WHERE DeptNo IN (
+    //          SELECT DeptNo FROM Dept WHERE Loc = 'CHICAGO'
+    // );
     [Fact]
     public void ShouldReturnEmployeesFromChicago()
     {
         var emps = Database.GetEmps();
         var depts = Database.GetDepts();
 
-        List<Emp> result = null; 
+        var result = emps
+            .Where(e => depts
+                .Where(d => d.Loc == "CHICAGO")
+                .Select(d => d.DeptNo)
+                .Contains(e.DeptNo))
+            .ToList(); 
 
-        Assert.All(result, e => Assert.Equal(30, e.DeptNo));
+        Assert.All(result, e => Assert.Contains(e.DeptNo, depts
+            .Where(d => d.Loc == "CHICAGO")
+            .Select(d => d.DeptNo)));
     }
 
     // 4. SELECT projection
