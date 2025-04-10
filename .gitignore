@@ -398,3 +398,21 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.DotSettings.user
+
+# Ignore debug and runtime files
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Ignore Rider/JetBrains
+.idea/
