@@ -105,9 +105,15 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.Contains(result, g => g.DeptNo == 30 && g.Count == 2);
+        var result = emps
+            .GroupBy(emp => emp.DeptNo)
+            .Select(group => new
+            {
+                DeptNo =group.Key,
+                Count = group.Count()       //liczba pracownikow w danej grupie
+            });
+        
+        Assert.Contains(result, g => g.DeptNo == 30 && g.Count == 2);
     }
 
     // 7. SelectMany (simulate flattening)
