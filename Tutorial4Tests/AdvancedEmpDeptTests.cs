@@ -80,9 +80,12 @@ public class AdvancedEmpDeptTests
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.True(result);
+        //var result = emps.Where(emp => emp.Sal > 500).ToList(); 
+        var result = emps
+            .All(emp => emp.Sal > 500);     //lepsza wersja, bez podwójnego filtrowania
+        
+        //Assert.True(result.All(e => e.Sal > 500));
+        Assert.True(result);
     }
 
     // 17. Any employee with commission over 400
@@ -103,10 +106,10 @@ public class AdvancedEmpDeptTests
     public void ShouldReturnEmployeeManagerPairs()
     {
         var emps = Database.GetEmps();
-
-        // var result = null;
-        //
-        // Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
+        
+        var result = 
+        
+        Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
     }
 
     // 19. Let clause usage (sal + comm)
