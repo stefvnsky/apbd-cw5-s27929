@@ -83,9 +83,19 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
         var emps = Database.GetEmps();
         var depts = Database.GetDepts();
 
-        //var result = null; 
-
-        //Assert.Contains(result, r => r.DName == "SALES" && r.EName == "ALLEN");
+        var result = emps
+            .Join(                                  //na czym robimy join
+                depts,                              //co dolaczamy
+                emp => emp.DeptNo,                  //klucz emps
+                dept => dept.DeptNo,                //klucz depts
+                (emp, dept) => new { emp, dept }    //wynik polaczenia 
+            ).Select(obj => new           //tylko ename i dname 
+            {
+                obj.emp.EName, 
+                obj.dept.DName
+            }); 
+        
+        Assert.Contains(result, r => r.DName == "SALES" && r.EName == "ALLEN");
     }
 
     // 6. Group by DeptNo
