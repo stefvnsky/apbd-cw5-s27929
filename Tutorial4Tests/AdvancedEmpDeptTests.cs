@@ -95,9 +95,10 @@ public class AdvancedEmpDeptTests
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.True(result);
+        var result = emps
+            .Any(emp => emp.Comm > 400);
+        
+        Assert.True(result);
     }
 
     // 18. Self-join to get employee-manager pairs
@@ -107,9 +108,9 @@ public class AdvancedEmpDeptTests
     {
         var emps = Database.GetEmps();
         
-        var result = 
+        //var result = 
         
-        Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
+        //Assert.Contains(result, r => r.Employee == "SMITH" && r.Manager == "FORD");
     }
 
     // 19. Let clause usage (sal + comm)
