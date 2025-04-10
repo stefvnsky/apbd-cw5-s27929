@@ -95,9 +95,10 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
                 (emp, dept) => new { emp, dept }    //wynik polaczenia 
             ).Select(obj => new           //tylko ename i dname 
             {
-                obj.emp.EName, 
+                obj.emp.EName,
                 obj.dept.DName
-            }); 
+            })
+            .ToList(); 
         
         Assert.Contains(result, r => r.DName == "SALES" && r.EName == "ALLEN");
     }
@@ -113,9 +114,10 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
             .GroupBy(emp => emp.DeptNo)
             .Select(group => new
             {
-                DeptNo =group.Key,
+                DeptNo = group.Key,
                 Count = group.Count()       //liczba pracownikow w danej grupie
-            });
+            })
+            .ToList();
         
         Assert.Contains(result, g => g.DeptNo == 30 && g.Count == 2);
     }
@@ -133,7 +135,7 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
             {
                 emp.EName, 
                 emp.Comm
-            })       
+            })
             .ToList();
         
         Assert.All(result, r => Assert.NotNull(r.Comm));
@@ -152,9 +154,10 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
             .Where(pair => pair.emp.Sal >= pair.sal.Losal && pair.emp.Sal <= pair.sal.Hisal)
             .Select(pair => new
             {
-                pair.emp.EName, 
+                pair.emp.EName,
                 pair.sal.Grade
-            });
+            })
+            .ToList();
         
         Assert.Contains(result, r => r.EName == "ALLEN" && r.Grade == 3);
     }
@@ -164,11 +167,19 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     [Fact]
     public void ShouldCalculateAverageSalaryPerDept()
     {
+        //emp => emp.Sal to dla kazdego pracownika zwroc jego pensje
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.Contains(result, r => r.DeptNo == 30 && r.AvgSal > 1000);
+        var result = emps
+            .GroupBy(emp => emp.DeptNo)             //grupowanie wedlug dzialu
+            .Select(group => new
+            {
+                DeptNo = group.Key,         
+                AvgSal = group.Average(emp => emp.Sal)      //srednia pensja w grupie
+            })
+            .ToList();
+        
+        Assert.Contains(result, r => r.DeptNo == 30 && r.AvgSal > 1000);
     }
 
     // 10. Complex filter with subquery and join
