@@ -36,13 +36,8 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
             .OrderByDescending(e => e.Sal)
             .ToList();
         
-        //czy kazdy pracownik nalezy do Deptno=30
-        Assert.All(result, e => Assert.Equal(30, e.DeptNo));
-        //czy lista posortowana malejąco
-        Assert.True(result.SequenceEqual(result.OrderByDescending(e => e.Sal)));
-        
-        /*Assert.Equal(2, result.Count);
-        Assert.True(result[0].Sal >= result[1].Sal);*/
+        Assert.Equal(2, result.Count);
+        Assert.True(result[0].Sal >= result[1].Sal);
     }
 
     // 3. Subquery using LINQ (IN clause)
@@ -56,15 +51,10 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
         var depts = Database.GetDepts();
 
         var result = emps
-            .Where(e => depts
-                .Where(d => d.Loc == "CHICAGO")
-                .Select(d => d.DeptNo)
-                .Contains(e.DeptNo))
-            .ToList(); 
+            .Where(e => depts.Any(d => d.Loc == "CHICAGO" && d.DeptNo == e.DeptNo))
+            .ToList();
 
-        Assert.All(result, e => Assert.Contains(e.DeptNo, depts
-            .Where(d => d.Loc == "CHICAGO")
-            .Select(d => d.DeptNo)));
+        Assert.All(result, e => Assert.Equal(30, e.DeptNo));
     }
 
     // 4. SELECT projection
@@ -74,13 +64,15 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     {
         var emps = Database.GetEmps();
 
-        //var result = null; 
+        var result = emps
+            .Select(e => new { e.EName, e.Sal })
+            .ToList();
         
-        // Assert.All(result, r =>
-        // {
-        //     Assert.False(string.IsNullOrWhiteSpace(r.EName));
-        //     Assert.True(r.Sal > 0);
-        // });
+        Assert.All(result, r =>
+        { 
+            Assert.False(string.IsNullOrWhiteSpace(r.EName)); 
+            Assert.True(r.Sal > 0);
+        });
     }
 
     // 5. JOIN Emp to Dept
