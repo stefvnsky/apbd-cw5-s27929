@@ -189,8 +189,13 @@ public class EmpDeptSalgradeTests(ITestOutputHelper output)
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.Contains("ALLEN", result);
+        var result = emps
+            .Where(emp => emp.Sal > emps
+                .Where(e => e.DeptNo == emp.DeptNo) //pracownicy z tego samego dzialu
+                .Average(e => e.Sal))               //srednia pensja w tym dziale
+            .Select(emp => emp.EName)
+            .ToList();
+        
+        Assert.Contains("ALLEN", result);
     }
 }
