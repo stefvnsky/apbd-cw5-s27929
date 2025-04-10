@@ -21,7 +21,9 @@ public class AdvancedEmpDeptTests
     {
         var emps = Database.GetEmps();
 
-        decimal? minSalary = null;
+        decimal? minSalary = emps
+            .Where(emp => emp.DeptNo == 30)
+            .Min(emp => emp.Sal);
 
         Assert.Equal(1250, minSalary);
     }
